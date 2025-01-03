@@ -21,7 +21,9 @@ SELECT
     or made requests, but did not receive any confirmation (cc.confirmations = 0)
     confirmation_rate should be zero. Otherwise, we'll compute the rate. */
             WHEN ISNULL(cc.confirmations,0) = 0 THEN 0
-            ELSE ROUND(CAST(cc.confirmations AS FLOAT)/CAST((cc.confirmations + ISNULL(tc.timeouts,0)) AS FLOAT),2)
+            ELSE ROUND(
+                CAST(cc.confirmations AS FLOAT)/CAST((cc.confirmations + ISNULL(tc.timeouts,0)
+                ) AS FLOAT),2)
             END AS confirmation_rate
 FROM
     signups as s
