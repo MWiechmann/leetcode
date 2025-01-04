@@ -41,8 +41,8 @@ WITH
                     AND contests.contest_id = reg.contest_id
                 ) AS user_attended
         FROM
-            unique_contests contests
-            CROSS JOIN users usr
+            unique_contests AS contests
+            CROSS JOIN users AS usr
     )
 SELECT
     contest_id,
