@@ -1,5 +1,6 @@
 -- PostgreSQL
-/*
+-- Simple solution: Calculate percentages using counts of registrations and total users
+
 SELECT
     contest_id,
     ROUND(
@@ -14,35 +15,42 @@ ORDER BY
     percentage DESC,
     contest_id ASC
 ;
-*/
 
+/*
 -- Trying out alternative solution:
+-- Creates attendance matrix (user*event) and tracks perfomance for each with Boolean
+-- can then be used to compute attendance
+-- less performant and more complex ofc
+-- but I found this interesting to try out...
+-- also potentially more flexible for other types of analyses
+
 WITH 
     unique_contests AS(
         SELECT DISTINCT contest_id
         FROM register
     ),
-    individual_user_atendance AS(
+    registration_status AS(
         SELECT
-            uc.contest_id,
-            us.user_id,
+            contests.contest_id,
+            usr.user_id,
             EXISTS(
                 SELECT 1
-                FROM register AS re
+                FROM register reg
                 WHERE
-                    us.user_id=re.user_id
-                    AND uc.contest_id = re.contest_id
+                    usr.user_id = reg.user_id
+                    AND contests.contest_id = reg.contest_id
                 ) AS user_attended
         FROM
-            unique_contests AS uc
-            CROSS JOIN users AS us
+            unique_contests contests
+            CROSS JOIN users usr
     )
 SELECT
     contest_id,
     ROUND(AVG(user_attended::int)*100,2) AS percentage
-FROM individual_user_atendance
+FROM registration_status
 GROUP BY contest_id
 ORDER BY
     percentage DESC,
     contest_id ASC
 ;
+*/
