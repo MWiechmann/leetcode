@@ -1,5 +1,5 @@
 -- PostgreSQL
-/*
+
 WITH first_order AS (
     SELECT
         customer_id,
@@ -21,7 +21,7 @@ FROM
         ON d.customer_id = fo.customer_id
         AND d.order_date = fo.order_date
 ;
-*/
+/*
 WITH ranked_orders AS (
     SELECT
         customer_id,
@@ -37,6 +37,5 @@ SELECT
         ELSE 0
         END)*100
     ,2) AS immediate_percentage 
-FROM ranked_orders
-WHERE
-    order_rank = 1;
+FROM ranked_orders;
+*/
