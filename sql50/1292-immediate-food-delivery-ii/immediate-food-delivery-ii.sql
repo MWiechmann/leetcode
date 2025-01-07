@@ -1,5 +1,27 @@
 -- PostgreSQL
+WITH ranked_orders AS (
+    SELECT
+        customer_id,
+        RANK() OVER (PARTITION BY customer_id ORDER BY order_date ASC) as order_rank,
+        order_date,
+        customer_pref_delivery_date
+    FROM delivery
+)
+SELECT
+    ROUND(
+        AVG(CASE
+        WHEN order_date = customer_pref_delivery_date THEN 1
+        ELSE 0
+        END)*100
+    ,2) AS immediate_percentage 
+FROM ranked_orders
+WHERE order_rank = 1;
 
+/*
+-- Alternative solution
+-- Uses CTE which filters for first orders per customer using MIN
+-- Then uses INNER JOIN with delivery to filter out all other orders
+-- slightly less perfomant because of the JOIN
 WITH first_order AS (
     SELECT
         customer_id,
@@ -21,21 +43,4 @@ FROM
         ON d.customer_id = fo.customer_id
         AND d.order_date = fo.order_date
 ;
-/*
-WITH ranked_orders AS (
-    SELECT
-        customer_id,
-        RANK() OVER (PARTITION BY customer_id ORDER BY order_date ASC) as order_rank,
-        order_date,
-        customer_pref_delivery_date
-    FROM delivery
-)
-SELECT
-    ROUND(
-        AVG(CASE
-        WHEN order_date = customer_pref_delivery_date THEN 1
-        ELSE 0
-        END)*100
-    ,2) AS immediate_percentage 
-FROM ranked_orders;
 */
