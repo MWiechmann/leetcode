@@ -13,3 +13,27 @@ GROUP BY
     e.name
 ORDER BY
     employee_id
+
+/*
+-- Alternative solution using correlated subqueries
+-- Terrible performance wise ofc, but wanted to practice them...
+SELECT
+    employee_id,
+    name,
+    (
+        SELECT COUNT(reports_to)
+        FROM employees AS e2
+        WHERE e.employee_id = e2.reports_to
+    ) AS reports_count,
+    (
+        SELECT AVG(age)::INTEGER
+        FROM employees AS e2
+        WHERE e.employee_id = e2.reports_to
+    ) AS average_age
+FROM employees as e
+WHERE EXISTS (
+    SELECT 1
+    FROM employees as e2
+    WHERE e.employee_id = e2.reports_to
+)
+*/
