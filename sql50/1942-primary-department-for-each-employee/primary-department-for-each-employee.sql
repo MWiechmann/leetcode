@@ -1,4 +1,5 @@
 -- PostgreSQL
+/*
 WITH count_dep AS (
     SELECT
         employee_id,
@@ -17,3 +18,17 @@ FROM
 WHERE
     e.primary_flag  = 'Y'
     OR cd.count_dep = 1 
+*/
+
+SELECT
+    employee_id,
+    department_id
+FROM (
+    SELECT
+        *,
+        COUNT(*) OVER (PARTITION BY employee_id) AS count_dep
+    FROM employee
+)
+WHERE
+    primary_flag  = 'Y'
+    OR count_dep = 1
