@@ -1,5 +1,4 @@
 -- PostgreSQL
-/*
 SELECT
     employee_id,
     department_id
@@ -12,8 +11,8 @@ FROM (
 WHERE
     primary_flag  = 'Y'
     OR count_dep = 1
-*/
 
+/*
 -- Alternative solution using CTE
 -- Should in theory be slightly less performant due two needing two passes
 WITH count_dep AS (
@@ -34,7 +33,7 @@ FROM
 WHERE
     e.primary_flag  = 'Y'
     OR cd.count_dep = 1 
-
+*/
 
 /*
 -- Alternative solution using correlated sub-query
