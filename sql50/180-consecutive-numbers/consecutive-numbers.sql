@@ -1,4 +1,19 @@
 -- PostgreSQL
+WITH prev_nums AS(
+    SELECT
+        *,
+        LAG(num) OVER (ORDER BY id) AS prev_num,
+        LAG(num, 2) OVER (ORDER BY id) AS prev2_num
+    FROM logs
+)
+SELECT DISTINCT num as ConsecutiveNums
+FROM prev_nums
+WHERE
+    num = prev_num
+    AND num = prev2_num
+
+/*
+-- Alternative solution using self-joins
 SELECT DISTINCT l.num AS ConsecutiveNums
 FROM logs AS l
     INNER JOIN logs AS l2
@@ -8,6 +23,7 @@ FROM logs AS l
     WHERE
         l.num = l2.num
         AND l.num = l3.num
+*/
 
 /*
 -- ALternative solution using correlated subqueries
