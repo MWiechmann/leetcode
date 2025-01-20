@@ -1,4 +1,5 @@
 -- PostgreSQL
+-- Solution using Windows Function in a CTE
 WITH prev_nums AS(
     SELECT
         *,
