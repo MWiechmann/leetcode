@@ -1,4 +1,17 @@
 -- PostgreSQL
+SELECT DISTINCT l.num AS ConsecutiveNums
+FROM logs AS l
+    INNER JOIN logs AS l2
+        ON l.id = l2.id-1
+    INNER JOIN logs AS l3
+        ON l.id = l3.id-2
+    WHERE
+        l.num = l2.num
+        AND l.num = l3.num
+
+/*
+-- ALternative solution using correlated subqueries
+-- (terrible performance-wise ofc...)
 SELECT DISTINCT num AS ConsecutiveNums
 FROM logs AS l
 WHERE 
@@ -20,3 +33,4 @@ WHERE
             AND l.num = l3.num
         )
     )
+*/
