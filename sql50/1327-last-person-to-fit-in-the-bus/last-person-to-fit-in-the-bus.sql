@@ -1,5 +1,8 @@
+-- As a sidenote: Those are some pretty meaty people (500 kg?!?)
+
 -- PostgreSQL
-/*
+
+-- solution using windows function and CTE
 WITH running_total_weight AS(
     SELECT
         person_name,
@@ -16,8 +19,9 @@ FROM running_total_weight
 WHERE rt_weight <= 1000
 ORDER BY turn DESC
 LIMIT 1;
-*/
 
+
+/*
 -- Alternative solution using correlated subqueries
 SELECT
     person_name
@@ -26,3 +30,4 @@ WHERE (SELECT SUM(weight) FROM queue AS q2
     WHERE q2.turn <= q.turn) <= 1000
 ORDER BY turn DESC
 LIMIT 1;
+*/
