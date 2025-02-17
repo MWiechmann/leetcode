@@ -1,5 +1,3 @@
--- As a sidenote: Those are some pretty meaty people (500 kg?!?)
-
 -- PostgreSQL
 
 -- solution using windows function and CTE
