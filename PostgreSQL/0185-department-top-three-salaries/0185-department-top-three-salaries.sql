@@ -11,7 +11,6 @@ WITH salaries_drank AS (
     FROM employee AS e
     INNER JOIN department as d
         ON e.departmentId = d.id
-    ORDER BY departmentid, rank
 )
 SELECT
     department AS "Department",
