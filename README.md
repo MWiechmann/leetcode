@@ -15,6 +15,7 @@ My solutions for various LeetCode challenges, synced with LeetSync ✨
 | [1321-restaurant-growth](https://github.com/MWiechmann/leetcode/tree/main/PostgreSQL/1321-restaurant-growth/) | Medium |
 | [1327-list-the-products-ordered-in-a-period](https://github.com/MWiechmann/leetcode/tree/main/PostgreSQL/1327-list-the-products-ordered-in-a-period/) | Easy |
 | [1484-group-sold-products-by-the-date](https://github.com/MWiechmann/leetcode/tree/main/PostgreSQL/1484-group-sold-products-by-the-date/) | Easy |
+| [1517-find-users-with-valid-e-mails](https://github.com/MWiechmann/leetcode/tree/main/PostgreSQL/1517-find-users-with-valid-e-mails/) | Easy |
 | [1527-patients-with-a-condition](https://github.com/MWiechmann/leetcode/tree/main/PostgreSQL/1527-patients-with-a-condition/) | Easy |
 | [1667-fix-names-in-a-table](https://github.com/MWiechmann/leetcode/tree/main/PostgreSQL/1667-fix-names-in-a-table/) | Easy |
 <!---LeetCode Topics End-->
